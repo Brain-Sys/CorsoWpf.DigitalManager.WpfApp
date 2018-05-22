@@ -23,6 +23,7 @@
         
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="{Binding CurrentUser}" FontSize="18" />
+            <TextBlock Text="{Binding SelectedPerson.Nation}" HorizontalAlignment="Right" FontSize="18" />
         </StackPanel>
 
         <TextBlock Text="...download in corso..." HorizontalAlignment="Center" VerticalAlignment="Center"
