@@ -95,6 +95,7 @@ namespace CorsoWpf.DigitalManager.ViewModels
             {
                 // Login OK
                 this.Color = "Green";
+                // Messaggio di broadcast (login avvenuto)
             }
             else
             {

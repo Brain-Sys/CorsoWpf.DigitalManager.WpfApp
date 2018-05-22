@@ -3,10 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:CorsoWpf.DigitalManager.ViewModels;assembly=CorsoWpf.DigitalManager.ViewModels"
         xmlns:local="clr-namespace:CorsoWpf.DigitalManager.WpfApp"
-        mc:Ignorable="d"
-        Title="MainMenuWindow" Height="450" Width="800">
-    <Grid>
+        mc:Ignorable="d" Title="MainMenuWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <vm:MainMenuViewModel x:Key="viewmodel" />
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource viewmodel}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="igor.damiani" FontSize="18" />
+        </StackPanel>
     </Grid>
 </Window>
