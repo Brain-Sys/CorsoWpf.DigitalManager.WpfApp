@@ -95,7 +95,13 @@ namespace CorsoWpf.DigitalManager.ViewModels
             {
                 // Login OK
                 this.Color = "Green";
+
                 // Messaggio di broadcast (login avvenuto)
+                LoginSuccessfulMessage msg = new LoginSuccessfulMessage();
+                msg.LoginTimestamp = DateTime.Now;
+                msg.Username = this.Username;
+                msg.Role = "admin";
+                Messenger.Default.Send(msg);
             }
             else
             {

@@ -16,9 +16,19 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
+        <ListBox ItemsSource="{Binding Items}">
+            
+        </ListBox>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="igor.damiani" FontSize="18" />
+            <TextBlock Text="{Binding CurrentUser}" FontSize="18" />
         </StackPanel>
+
+        <TextBlock Text="...download in corso..." HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Background="Black" Foreground="LightGray" FontSize="22" Padding="20,8"
+                   Visibility="{Binding IsDownloading,Converter={StaticResource blnToVisCnv}}" />
+        <TextBlock Text="&#x270b;" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Segoe UI Symbol" FontSize="43"
+                   Visibility="{Binding IsDownloading,Converter={StaticResource blnToVisCnv}}" />
     </Grid>
 </Window>

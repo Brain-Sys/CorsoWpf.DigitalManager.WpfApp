@@ -39,12 +39,6 @@ namespace CorsoWpf.DigitalManager.WpfApp
                 else
                     wnd.Show();
             }
-
-            //if (obj == 1)
-            //{
-            //    MainMenuWindow wnd = new MainMenuWindow();
-            //    wnd.Show();
-            //}
         }
     }
 }
