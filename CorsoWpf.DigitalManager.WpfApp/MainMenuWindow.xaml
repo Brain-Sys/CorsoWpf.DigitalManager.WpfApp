@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding Items}">
+        <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedPerson}">
             
         </ListBox>
         

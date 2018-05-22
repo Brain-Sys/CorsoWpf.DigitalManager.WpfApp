@@ -42,6 +42,15 @@ namespace CorsoWpf.DigitalManager.ViewModels
             }
         }
 
+        private Person selectedPerson;
+        public Person SelectedPerson
+        {
+            get { return selectedPerson; }
+            set { selectedPerson = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
         public MainMenuViewModel()
         {
             this.CurrentUser = "(guest)";
