@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using CorsoWpf.DigitalManager.Messages;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,16 +17,34 @@ namespace CorsoWpf.DigitalManager.WpfApp
     {
         public App()
         {
-            Messenger.Default.Register<int>(this, openNewView);
+            Messenger.Default.Register<OpenNewViewMessage>(this, openNewView);
         }
 
-        private void openNewView(int obj)
+        private void openNewView(OpenNewViewMessage obj)
         {
-            if (obj == 1)
+            Window wnd = null;
+
+            string name = "CorsoWpf.DigitalManager.WpfApp." + obj.WindowName + "Window";
+            Type t = Type.GetType(name);
+
+            if (t != null)
             {
-                MainMenuWindow wnd = new MainMenuWindow();
-                wnd.Show();
+                wnd = Activator.CreateInstance(t) as Window;
             }
+
+            if (wnd != null)
+            {
+                if (obj.Modal)
+                    wnd.ShowDialog();
+                else
+                    wnd.Show();
+            }
+
+            //if (obj == 1)
+            //{
+            //    MainMenuWindow wnd = new MainMenuWindow();
+            //    wnd.Show();
+            //}
         }
     }
 }

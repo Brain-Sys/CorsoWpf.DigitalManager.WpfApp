@@ -15,9 +15,25 @@
     <Grid DataContext="{StaticResource viewmodel}" Background="{Binding Color}">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="NOME-UTENTE" FontSize="30" Margin="4" />
-            <TextBox Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}" FontSize="22" Margin="4" />
+            
+            
+            
+            <TextBox Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}" FontSize="22" Margin="4">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="F1" Command="{Binding ShowHelpCommand}" CommandParameter="Username" />
+                    <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
+                    <KeyBinding Key="F9" Command="{Binding OpenAsGuestCommand}" />
+                </TextBox.InputBindings>    
+            </TextBox>
+            
+            
+            
             <TextBlock Text="PASSWORD" FontSize="30" Margin="4" />
-            <TextBox Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" FontSize="22" Margin="4" />
+            <TextBox Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" FontSize="22" Margin="4">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="F1" Command="{Binding ShowHelpCommand}" CommandParameter="Password" />
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Command="{Binding LoginCommand}" Content="Login"
                     FontSize="30" Margin="4" />
             

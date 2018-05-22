@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsoWpf.DigitalManager.WpfApp", "CorsoWpf.DigitalManager.WpfApp\CorsoWpf.DigitalManager.WpfApp.csproj", "{996EEFE8-B12C-4A14-85E9-13FBE93FA6E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsoWpf.DigitalManager.ViewModels", "CorsoWpf.DigitalManager.ViewModels\CorsoWpf.DigitalManager.ViewModels.csproj", "{3B6F3FDC-7D72-412B-8219-9007C041A367}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsoWpf.DigitalManager.ViewModels", "CorsoWpf.DigitalManager.ViewModels\CorsoWpf.DigitalManager.ViewModels.csproj", "{3B6F3FDC-7D72-412B-8219-9007C041A367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsoWpf.DigitalManager.Messages", "CorsoWpf.DigitalManager.Messages\CorsoWpf.DigitalManager.Messages.csproj", "{A6E824A0-A58D-4E51-9C8D-2D6ED65CFFFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3B6F3FDC-7D72-412B-8219-9007C041A367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B6F3FDC-7D72-412B-8219-9007C041A367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B6F3FDC-7D72-412B-8219-9007C041A367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6E824A0-A58D-4E51-9C8D-2D6ED65CFFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6E824A0-A58D-4E51-9C8D-2D6ED65CFFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6E824A0-A58D-4E51-9C8D-2D6ED65CFFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6E824A0-A58D-4E51-9C8D-2D6ED65CFFFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

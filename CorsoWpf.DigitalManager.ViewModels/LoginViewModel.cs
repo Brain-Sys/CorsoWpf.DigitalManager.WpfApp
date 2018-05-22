@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CorsoWpf.DigitalManager.Messages;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -85,7 +86,7 @@ namespace CorsoWpf.DigitalManager.ViewModels
 
         private void OpenAsGuestCommandExecute()
         {
-            Messenger.Default.Send(1);
+            Messenger.Default.Send(new OpenNewViewMessage("MainMenu"));
         }
 
         private void LoginCommandExecute()

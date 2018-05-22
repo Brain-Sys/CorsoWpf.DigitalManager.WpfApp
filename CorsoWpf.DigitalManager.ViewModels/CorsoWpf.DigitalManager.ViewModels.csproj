@@ -8,4 +8,8 @@
     <PackageReference Include="MvvmLightLibs" Version="5.4.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CorsoWpf.DigitalManager.Messages\CorsoWpf.DigitalManager.Messages.csproj" />
+  </ItemGroup>
+
 </Project>
