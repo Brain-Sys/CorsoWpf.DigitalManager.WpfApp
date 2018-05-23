@@ -44,9 +44,14 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
             }
         }
 
-        public string Nation
+        public Uri Nation
         {
-            get { return "http://flag."+  internalInstance.Nation + ".jpg"; }
+            get
+            {
+                string code = internalInstance.Nation.ToLower();
+                string url = $"http://flags.fmcdn.net/data/flags/w580/{code}.png";
+                return new Uri(url, UriKind.RelativeOrAbsolute);
+            }
         }
 
         public double Weight
@@ -79,7 +84,8 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
         {
             this.IsBusy = true;
 
-            await Task.Run(async () => {
+            await Task.Run(async () =>
+            {
 
                 int n = new Random((int)DateTime.Now.Ticks).Next(1, 10);
                 await Task.Delay(n * 1000);
