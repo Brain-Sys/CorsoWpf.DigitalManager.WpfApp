@@ -37,7 +37,7 @@
                     </Style>
                 </StackPanel.Resources>
                 <Button Content="S" />
-                <Button Content="D" Command="{Binding DeleteCommand}" />
+                <Button Content="D" />
                 <Button Content="E" Command="{Binding ExportCommand}" />
             </StackPanel>
 

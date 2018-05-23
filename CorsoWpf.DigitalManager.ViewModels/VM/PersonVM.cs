@@ -48,10 +48,15 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
         {
             get
             {
-                string code = InternalInstance.Nation.ToLower();
+                string code = InternalInstance.Nation?.ToLower();
                 string url = $"http://flags.fmcdn.net/data/flags/w580/{code}.png";
                 return new Uri(url, UriKind.RelativeOrAbsolute);
             }
+            //set
+            //{
+            //    InternalInstance.Nation = value;
+            //    base.RaisePropertyChanged();
+            //}
         }
 
         public double Weight

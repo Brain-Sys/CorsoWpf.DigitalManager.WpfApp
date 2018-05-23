@@ -14,6 +14,7 @@ using CorsoWpf.DigitalManager.ViewModels.VM;
 using CorsoWpf.DigitalManager.Repository;
 using GalaSoft.MvvmLight.Command;
 using System.Threading;
+using System.Collections.ObjectModel;
 
 namespace CorsoWpf.DigitalManager.ViewModels
 {
@@ -34,8 +35,8 @@ namespace CorsoWpf.DigitalManager.ViewModels
             }
         }
 
-        private List<PersonVM> items;
-        public List<PersonVM> Items
+        private ObservableCollection<PersonVM> items;
+        public ObservableCollection<PersonVM> Items
         {
             get { return items; }
             set { items = value;
@@ -52,23 +53,44 @@ namespace CorsoWpf.DigitalManager.ViewModels
             }
         }
 
-        private Person selectedPerson;
-        public Person SelectedPerson
+        private PersonVM selectedPerson;
+        public PersonVM SelectedPerson
         {
             get { return selectedPerson; }
             set { selectedPerson = value;
                 base.RaisePropertyChanged();
+                this.DeleteCommand.RaiseCanExecuteChanged();
             }
         }
 
+        public RelayCommand AddCommand { get; set; }
+        public RelayCommand DeleteCommand { get; set; }
         public RelayCommand SaveCommand { get; set; }
 
         public MainMenuViewModel()
         {
+            this.DeleteCommand = new RelayCommand(DeleteCommandExecute, DeleteCommandCanExecute);
             this.SaveCommand = new RelayCommand(SaveCommandExecute, SaveCommandCanExecute);
+            this.AddCommand = new RelayCommand(() => { this.Items.Insert(0, new PersonVM(new Person())); });
 
             this.CurrentUser = "(guest)";
             Messenger.Default.Register<LoginSuccessfulMessage>(this, manageLogin);
+        }
+
+        private bool DeleteCommandCanExecute()
+        {
+            return this.SelectedPerson != null;
+        }
+
+        private void DeleteCommandExecute()
+        {
+            QuestionMessage msg = new QuestionMessage();
+            msg.Title = "Conferma!";
+            msg.Message = $"Sei sicuro di voler eliminare:\r\n{this.SelectedPerson.FirstName} {this.SelectedPerson.LastName} ?";
+            msg.Yes = () => this.Items.Remove(this.SelectedPerson);
+            msg.No = null;
+
+            Messenger.Default.Send(msg);
         }
 
         private bool SaveCommandCanExecute()
@@ -105,7 +127,7 @@ namespace CorsoWpf.DigitalManager.ViewModels
 #endif
 
             List<Person> people = await repo.Load();
-            this.Items = people.Select(p => new PersonVM(p)).ToList();
+            this.Items = new ObservableCollection<PersonVM>(people.Select(p => new PersonVM(p)).ToList());
             this.IsDownloading = false;
         }
 

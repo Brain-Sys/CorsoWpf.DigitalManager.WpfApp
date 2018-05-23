@@ -33,14 +33,20 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
+
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="{Binding CurrentUser}" FontSize="18" />
             <TextBlock Text="{Binding SelectedPerson.Nation}" HorizontalAlignment="Right" FontSize="18" />
         </StackPanel>
 
-        <Button Grid.Row="1" HorizontalAlignment="Right" Content="Salva"
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <Button Content="Salva"
                 Margin="4" Padding="16,2" FontSize="26" Command="{Binding SaveCommand}" />
+            <Button Content="Aggiungi"
+                Margin="4" Padding="16,2" FontSize="26" Command="{Binding AddCommand}" />
+            <Button Content="Cancella"
+                Margin="4" Padding="16,2" FontSize="26" Command="{Binding DeleteCommand}" />
+        </StackPanel>
 
         <TextBlock Text="...download in corso..." HorizontalAlignment="Center" VerticalAlignment="Center"
                    Background="Black" Foreground="LightGray" FontSize="22" Padding="20,8"

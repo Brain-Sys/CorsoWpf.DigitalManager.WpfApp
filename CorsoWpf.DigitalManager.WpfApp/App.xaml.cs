@@ -23,6 +23,22 @@ namespace CorsoWpf.DigitalManager.WpfApp
             Debug.WriteLine("Thread UI : " + Thread.CurrentThread.ManagedThreadId);
             Messenger.Default.Register<OpenNewViewMessage>(this, openNewView);
             Messenger.Default.Register<ShowMessage>(this, showMessage);
+            Messenger.Default.Register<QuestionMessage>(this, ask);
+        }
+
+        private void ask(QuestionMessage obj)
+        {
+            MessageBoxResult result = MessageBox.Show(obj.Message, obj.Title,
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                obj.Yes?.Invoke();
+            }
+            else
+            {
+                obj.No?.Invoke();
+            }
         }
 
         private void showMessage(ShowMessage obj)
@@ -47,6 +63,11 @@ namespace CorsoWpf.DigitalManager.WpfApp
 
             if (wnd != null)
             {
+                if (wnd.Resources.Contains("viewmodel"))
+                {
+                    var vm = wnd.Resources["viewmodel"] as ApplicationViewModelBase;
+                }
+
                 wnd.Closed += Wnd_Closed;
 
                 if (obj.Modal)
