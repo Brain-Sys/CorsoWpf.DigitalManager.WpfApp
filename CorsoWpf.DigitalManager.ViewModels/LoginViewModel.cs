@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace CorsoWpf.DigitalManager.ViewModels
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : ApplicationViewModelBase
     {
         private Timer timer;
 
@@ -74,6 +74,11 @@ namespace CorsoWpf.DigitalManager.ViewModels
 
             // TimerCallback callback = new TimerCallback(updateCurrentTime);
             timer = new Timer(updateCurrentTime, 1, 0, 1000);
+
+            for (int i = 0; i < 3; i++)
+            {
+                Messenger.Default.Send(new OpenNewViewMessage("MainMenu"));
+            }
         }
 
         private bool LoginCommandCanExecute()

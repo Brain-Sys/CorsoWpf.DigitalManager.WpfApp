@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:CorsoWpf.DigitalManager.ViewModels;assembly=CorsoWpf.DigitalManager.ViewModels"
+        xmlns:ctl="clr-namespace:CorsoWpf.DigitalManager.WpfApp.Controls"
         xmlns:local="clr-namespace:CorsoWpf.DigitalManager.WpfApp"
-        mc:Ignorable="d" Title="MainMenuWindow" Height="450" Width="800">
+        mc:Ignorable="d" Title="MainMenuWindow" Height="450" Width="800"
+        Closed="Window_Closed">
 
     <Window.Resources>
         <vm:MainMenuViewModel x:Key="viewmodel" />
@@ -17,8 +19,19 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedPerson}">
-            
+        <ListBox ItemsSource="{Binding Items}"
+                 HorizontalContentAlignment="Stretch"
+                 SelectedItem="{Binding SelectedPerson}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <ctl:EditPerson />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -31,5 +44,7 @@
                    Visibility="{Binding IsDownloading,Converter={StaticResource blnToVisCnv}}" />
         <TextBlock Text="&#x270b;" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Segoe UI Symbol" FontSize="43"
                    Visibility="{Binding IsDownloading,Converter={StaticResource blnToVisCnv}}" />
+
+        <!--<ctl:EditPerson />-->
     </Grid>
 </Window>

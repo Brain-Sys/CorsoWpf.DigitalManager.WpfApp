@@ -4,15 +4,19 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CorsoWpf.DigitalManager.ViewModels
 {
-    public class MainMenuViewModel : ViewModelBase
+    public class MainMenuViewModel : ApplicationViewModelBase
     {
+        private HttpClient client = new HttpClient();
+
         private string currentUser;
         public string CurrentUser
         {
@@ -57,8 +61,11 @@ namespace CorsoWpf.DigitalManager.ViewModels
             Messenger.Default.Register<LoginSuccessfulMessage>(this, manageLogin);
         }
 
+        // Metodo che viene eseguito quando avviene un login
+        // Messaggio broadcast
         private void manageLogin(LoginSuccessfulMessage obj)
         {
+            Debug.WriteLine("manageLogin");
             this.CurrentUser = obj.Username;
             downloadData();
         }
@@ -66,15 +73,32 @@ namespace CorsoWpf.DigitalManager.ViewModels
         private async void downloadData()
         {
             this.IsDownloading = true;
-            HttpClient client = new HttpClient();
+            
 
 #if DEBUG
-            await Task.Delay(10000);
+            await Task.Delay(2000);
 #endif
 
             string json = await client.GetStringAsync("http://download.vivendobyte.net/people.json");
             this.Items = JsonConvert.DeserializeObject<List<Person>>(json);
             this.IsDownloading = false;
+        }
+
+        public override void Dispose()
+        {
+            // Staccati dall'ascolto del messaggio LoginSuccessfulMessage
+            Messenger.Default.Unregister<LoginSuccessfulMessage>(this, manageLogin);
+
+            if (this.Items != null && this.Items.Any())
+            {
+                foreach (var item in this.Items)
+                {
+                    item.Dispose();
+                }
+            }
+
+            client.Dispose();
+            client = null;
         }
     }
 }

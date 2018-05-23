@@ -1,4 +1,5 @@
 ﻿using CorsoWpf.DigitalManager.Messages;
+using CorsoWpf.DigitalManager.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -29,15 +30,28 @@ namespace CorsoWpf.DigitalManager.WpfApp
 
             if (t != null)
             {
+                WindowCollection windows = Application.Current.Windows;
+
                 wnd = Activator.CreateInstance(t) as Window;
             }
 
             if (wnd != null)
             {
+                wnd.Closed += Wnd_Closed;
+
                 if (obj.Modal)
                     wnd.ShowDialog();
                 else
                     wnd.Show();
+            }
+        }
+
+        private void Wnd_Closed(object sender, EventArgs e)
+        {
+            if (this.Resources.Contains("viewmodel"))
+            {
+                var vm = this.Resources["viewmodel"] as ApplicationViewModelBase;
+                vm?.Dispose();
             }
         }
     }

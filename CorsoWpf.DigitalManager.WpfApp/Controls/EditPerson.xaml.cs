@@ -1,5 +1,4 @@
-﻿using CorsoWpf.DigitalManager.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CorsoWpf.DigitalManager.WpfApp
+namespace CorsoWpf.DigitalManager.WpfApp.Controls
 {
     /// <summary>
-    /// Interaction logic for MainMenuWindow.xaml
+    /// Interaction logic for EditPerson.xaml
     /// </summary>
-    public partial class MainMenuWindow : Window
+    public partial class EditPerson : UserControl
     {
-        public MainMenuWindow()
+        public event EventHandler PersonExportCompleted;
+
+        public EditPerson()
         {
             InitializeComponent();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-
         }
     }
 }

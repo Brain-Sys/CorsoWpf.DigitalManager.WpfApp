@@ -3,7 +3,7 @@ using System;
 
 namespace CorsoWpf.DigitalManager.DomainModel
 {
-    public class Person
+    public class Person : IDisposable
     {
         [JsonProperty("id")]
         public int ID { get; set; }
@@ -16,5 +16,10 @@ namespace CorsoWpf.DigitalManager.DomainModel
 
         [JsonProperty("country")]
         public string Nation { get; set; }
+
+        public void Dispose()
+        {
+            // Free memory
+        }
     }
 }
