@@ -1,5 +1,6 @@
 ﻿using CorsoWpf.DigitalManager.Messages;
 using CorsoWpf.DigitalManager.ViewModels;
+using CorsoWpf.DigitalManager.WpfApp.Dialogs;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,12 @@ namespace CorsoWpf.DigitalManager.WpfApp
 
         private void ask(QuestionMessage obj)
         {
-            MessageBoxResult result = MessageBox.Show(obj.Message, obj.Title,
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            ConfirmWindow wnd = new ConfirmWindow();
+            wnd.Title = obj.Message;
+            bool result = wnd.ShowDialog().GetValueOrDefault();
+            obj.Parameter = wnd.sldValue.Value;
 
-            if (result == MessageBoxResult.Yes)
+            if (result)
             {
                 obj.Yes?.Invoke();
             }
@@ -39,6 +42,18 @@ namespace CorsoWpf.DigitalManager.WpfApp
             {
                 obj.No?.Invoke();
             }
+
+            //MessageBoxResult result = MessageBox.Show(obj.Message, obj.Title,
+            //    MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            //if (result == MessageBoxResult.Yes)
+            //{
+            //    obj.Yes?.Invoke();
+            //}
+            //else
+            //{
+            //    obj.No?.Invoke();
+            //}
         }
 
         private void showMessage(ShowMessage obj)
@@ -71,9 +86,13 @@ namespace CorsoWpf.DigitalManager.WpfApp
                 wnd.Closed += Wnd_Closed;
 
                 if (obj.Modal)
+                {
                     wnd.ShowDialog();
+                }
                 else
+                {
                     wnd.Show();
+                }
             }
         }
 
