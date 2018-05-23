@@ -66,6 +66,24 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
             {
                 InternalInstance.Weight = value;
                 base.RaisePropertyChanged();
+                base.RaisePropertyChanged(nameof(Status));
+            }
+        }
+
+        public string Status
+        {
+            get
+            {
+                string result = string.Empty;
+
+                if (this.Weight <= 20)
+                    result = "LOW";
+                else if (this.Weight > 20 && this.Weight <= 60)
+                    result = "MEDIUM";
+                else
+                    result = "HIGH";
+
+                return result;
             }
         }
 

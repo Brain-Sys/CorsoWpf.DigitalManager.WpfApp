@@ -7,6 +7,21 @@
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="400">
     <Border CornerRadius="8,24,8,24" BorderBrush="Red" BorderThickness="2"
             Padding="8" Margin="4">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Status}" Value="LOW">
+                        <Setter Property="Background" Value="Green" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Status}" Value="MEDIUM">
+                        <Setter Property="Background" Value="DarkOrange" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Status}" Value="HIGH">
+                        <Setter Property="Background" Value="Violet" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -23,7 +38,8 @@
             <TextBlock Text="Cognome" Grid.Row="2" />
             <TextBox Text="{Binding LastName}" Grid.Row="3" />
             <TextBlock Text="Nazione" Grid.Row="4" />
-            <ComboBox Grid.Row="5" />
+            <!--<ComboBox Grid.Row="5" HorizontalAlignment="Left" />-->
+            <Slider Grid.Row="5" Minimum="0" Maximum="100" Value="{Binding Weight}" />
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="6">
                 <StackPanel.Resources>
@@ -44,12 +60,12 @@
             <Image Source="{Binding Nation}" Grid.Row="6" Margin="8" Width="50"
                    HorizontalAlignment="Left" VerticalAlignment="Bottom" />
 
-            <Border Grid.RowSpan="7" Background="Black"
+            <!--<Border Grid.RowSpan="7" Background="Black"
                     Visibility="{Binding IsBusy,Converter={StaticResource blnToVisCnv}}">
                 <TextBlock Text="esportazione in corso"
                        TextAlignment="Center" 
                        Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
-            </Border>
+            </Border>-->
 
         </Grid>
     </Border>
