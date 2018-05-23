@@ -12,34 +12,34 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
 {
     public class PersonVM : ApplicationViewModelBase
     {
-        Person internalInstance;
+        public Person InternalInstance { get; private set; }
 
         public int ID
         {
-            get { return internalInstance.ID; }
+            get { return InternalInstance.ID; }
             set
             {
-                internalInstance.ID = value;
+                InternalInstance.ID = value;
                 base.RaisePropertyChanged();
             }
         }
 
         public string FirstName
         {
-            get { return internalInstance.FirstName; }
+            get { return InternalInstance.FirstName; }
             set
             {
-                internalInstance.FirstName = value;
+                InternalInstance.FirstName = value;
                 base.RaisePropertyChanged();
             }
         }
 
         public string LastName
         {
-            get { return internalInstance.LastName; }
+            get { return InternalInstance.LastName; }
             set
             {
-                internalInstance.LastName = value;
+                InternalInstance.LastName = value;
                 base.RaisePropertyChanged();
             }
         }
@@ -48,7 +48,7 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
         {
             get
             {
-                string code = internalInstance.Nation.ToLower();
+                string code = InternalInstance.Nation.ToLower();
                 string url = $"http://flags.fmcdn.net/data/flags/w580/{code}.png";
                 return new Uri(url, UriKind.RelativeOrAbsolute);
             }
@@ -56,10 +56,10 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
 
         public double Weight
         {
-            get { return internalInstance.Weight; }
+            get { return InternalInstance.Weight; }
             set
             {
-                internalInstance.Weight = value;
+                InternalInstance.Weight = value;
                 base.RaisePropertyChanged();
             }
         }
@@ -74,7 +74,7 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
         {
             this.ExportCommand = new RelayCommand(ExportCommandExecute);
 
-            this.internalInstance = person;
+            this.InternalInstance = person;
         }
 
         /// <summary>

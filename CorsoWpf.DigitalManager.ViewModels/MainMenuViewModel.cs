@@ -11,11 +11,15 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using CorsoWpf.DigitalManager.ViewModels.VM;
+using CorsoWpf.DigitalManager.Repository;
+using GalaSoft.MvvmLight.Command;
+using System.Threading;
 
 namespace CorsoWpf.DigitalManager.ViewModels
 {
     public class MainMenuViewModel : ApplicationViewModelBase
     {
+        private IRepository repo = new JsonRepository();
         private HttpClient client = new HttpClient();
 
         private string currentUser;
@@ -26,6 +30,7 @@ namespace CorsoWpf.DigitalManager.ViewModels
             {
                 currentUser = value;
                 base.RaisePropertyChanged();
+                this.SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -56,10 +61,30 @@ namespace CorsoWpf.DigitalManager.ViewModels
             }
         }
 
+        public RelayCommand SaveCommand { get; set; }
+
         public MainMenuViewModel()
         {
+            this.SaveCommand = new RelayCommand(SaveCommandExecute, SaveCommandCanExecute);
+
             this.CurrentUser = "(guest)";
             Messenger.Default.Register<LoginSuccessfulMessage>(this, manageLogin);
+        }
+
+        private bool SaveCommandCanExecute()
+        {
+            return this.CurrentUser != "(guest)";
+        }
+
+        private void SaveCommandExecute()
+        {
+            var people = this.Items.Select(p => p.InternalInstance).ToList();
+            bool result = repo.Save(people, "E:\\Anagrafica.json");
+
+            ShowMessage msg = new ShowMessage();
+            msg.Title = "Conferma!";
+            msg.Message = "Salvataggio completato!";
+            Messenger.Default.Send(msg);
         }
 
         // Metodo che viene eseguito quando avviene un login
@@ -73,15 +98,13 @@ namespace CorsoWpf.DigitalManager.ViewModels
 
         private async void downloadData()
         {
-            this.IsDownloading = true;
-            
+            this.IsDownloading = true;      
 
 #if DEBUG
             await Task.Delay(2000);
 #endif
 
-            string json = await client.GetStringAsync("http://download.vivendobyte.net/people.json");
-            List<Person> people = JsonConvert.DeserializeObject<List<Person>>(json);
+            List<Person> people = await repo.Load();
             this.Items = people.Select(p => new PersonVM(p)).ToList();
             this.IsDownloading = false;
         }

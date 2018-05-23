@@ -5,14 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CorsoWpf.DigitalManager.DomainModel\CorsoWpf.DigitalManager.DomainModel.csproj" />
-    <ProjectReference Include="..\CorsoWpf.DigitalManager.Messages\CorsoWpf.DigitalManager.Messages.csproj" />
-    <ProjectReference Include="..\CorsoWpf.DigitalManager.Repository\CorsoWpf.DigitalManager.Repository.csproj" />
   </ItemGroup>
 
 </Project>

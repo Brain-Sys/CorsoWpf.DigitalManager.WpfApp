@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -18,6 +20,7 @@ namespace CorsoWpf.DigitalManager.WpfApp
     {
         public App()
         {
+            Debug.WriteLine("Thread UI : " + Thread.CurrentThread.ManagedThreadId);
             Messenger.Default.Register<OpenNewViewMessage>(this, openNewView);
             Messenger.Default.Register<ShowMessage>(this, showMessage);
         }

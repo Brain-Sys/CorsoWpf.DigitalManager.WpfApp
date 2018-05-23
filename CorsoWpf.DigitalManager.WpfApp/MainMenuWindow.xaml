@@ -39,6 +39,9 @@
             <TextBlock Text="{Binding SelectedPerson.Nation}" HorizontalAlignment="Right" FontSize="18" />
         </StackPanel>
 
+        <Button Grid.Row="1" HorizontalAlignment="Right" Content="Salva"
+                Margin="4" Padding="16,2" FontSize="26" Command="{Binding SaveCommand}" />
+
         <TextBlock Text="...download in corso..." HorizontalAlignment="Center" VerticalAlignment="Center"
                    Background="Black" Foreground="LightGray" FontSize="22" Padding="20,8"
                    Visibility="{Binding IsDownloading,Converter={StaticResource blnToVisCnv}}" />
