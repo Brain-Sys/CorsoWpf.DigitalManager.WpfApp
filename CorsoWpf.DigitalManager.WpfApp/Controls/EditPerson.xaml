@@ -37,9 +37,16 @@
                     </Style>
                 </StackPanel.Resources>
                 <Button Content="S" />
-                <Button Content="D" />
-                <Button Content="E" />
+                <Button Content="D" Command="{Binding DeleteCommand}" />
+                <Button Content="E" Command="{Binding ExportCommand}" />
             </StackPanel>
+
+            <Border Grid.RowSpan="7" Background="Black"
+                    Visibility="{Binding IsBusy,Converter={StaticResource blnToVisCnv}}">
+                <TextBlock Text="esportazione in corso"
+                       TextAlignment="Center" 
+                       Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            </Border>
 
         </Grid>
     </Border>

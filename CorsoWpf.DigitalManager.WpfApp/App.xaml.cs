@@ -19,6 +19,13 @@ namespace CorsoWpf.DigitalManager.WpfApp
         public App()
         {
             Messenger.Default.Register<OpenNewViewMessage>(this, openNewView);
+            Messenger.Default.Register<ShowMessage>(this, showMessage);
+        }
+
+        private void showMessage(ShowMessage obj)
+        {
+            MessageBox.Show(obj.Message, obj.Title,
+                MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void openNewView(OpenNewViewMessage obj)

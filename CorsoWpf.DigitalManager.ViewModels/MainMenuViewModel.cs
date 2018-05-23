@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using CorsoWpf.DigitalManager.ViewModels.VM;
 
 namespace CorsoWpf.DigitalManager.ViewModels
 {
@@ -28,8 +29,8 @@ namespace CorsoWpf.DigitalManager.ViewModels
             }
         }
 
-        private List<Person> items;
-        public List<Person> Items
+        private List<PersonVM> items;
+        public List<PersonVM> Items
         {
             get { return items; }
             set { items = value;
@@ -80,7 +81,8 @@ namespace CorsoWpf.DigitalManager.ViewModels
 #endif
 
             string json = await client.GetStringAsync("http://download.vivendobyte.net/people.json");
-            this.Items = JsonConvert.DeserializeObject<List<Person>>(json);
+            List<Person> people = JsonConvert.DeserializeObject<List<Person>>(json);
+            this.Items = people.Select(p => new PersonVM(p)).ToList();
             this.IsDownloading = false;
         }
 

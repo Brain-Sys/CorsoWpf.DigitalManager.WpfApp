@@ -17,6 +17,8 @@ namespace CorsoWpf.DigitalManager.DomainModel
         [JsonProperty("country")]
         public string Nation { get; set; }
 
+        public double Weight { get; set; }
+
         public void Dispose()
         {
             // Free memory
