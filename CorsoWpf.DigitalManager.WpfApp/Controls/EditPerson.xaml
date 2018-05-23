@@ -44,12 +44,12 @@
             <Image Source="{Binding Nation}" Grid.Row="6" Margin="8" Width="50"
                    HorizontalAlignment="Left" VerticalAlignment="Bottom" />
 
-            <!--<Border Grid.RowSpan="7" Background="Black"
+            <Border Grid.RowSpan="7" Background="Black"
                     Visibility="{Binding IsBusy,Converter={StaticResource blnToVisCnv}}">
                 <TextBlock Text="esportazione in corso"
                        TextAlignment="Center" 
                        Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
-            </Border>-->
+            </Border>
 
         </Grid>
     </Border>
