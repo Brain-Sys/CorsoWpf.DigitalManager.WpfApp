@@ -10,6 +10,6 @@ namespace CorsoWpf.DigitalManager.Repository
     {
         Task<List<Person>> Load(string source = "http://download.vivendobyte.net/people.json");
 
-        bool Save(List<Person> list, string destination);
+        Task<bool> Save(List<Person> list, string destination);
     }
 }

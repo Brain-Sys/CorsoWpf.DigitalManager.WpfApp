@@ -76,10 +76,10 @@ namespace CorsoWpf.DigitalManager.ViewModels
             return this.CurrentUser != "(guest)";
         }
 
-        private void SaveCommandExecute()
+        private async void SaveCommandExecute()
         {
             var people = this.Items.Select(p => p.InternalInstance).ToList();
-            bool result = repo.Save(people, "E:\\Anagrafica.json");
+            bool result = await repo.Save(people, "E:\\Anagrafica.json");
 
             ShowMessage msg = new ShowMessage();
             msg.Title = "Conferma!";

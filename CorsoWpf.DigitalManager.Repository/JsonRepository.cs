@@ -35,12 +35,16 @@ namespace CorsoWpf.DigitalManager.Repository
             return result;
         }
 
-        public bool Save(List<Person> list, string destination)
+        public async Task<bool> Save(List<Person> list, string destination)
         {
-            Debug.WriteLine("Save Repo : " + Thread.CurrentThread.ManagedThreadId);
-            string json = string.Empty;
-            json = JsonConvert.SerializeObject(list);
-            File.WriteAllText(destination, json);
+            await Task.Run(() => {
+
+                Debug.WriteLine("Save Repo : " + Thread.CurrentThread.ManagedThreadId);
+                string json = string.Empty;
+                json = JsonConvert.SerializeObject(list);
+                File.WriteAllText(destination, json);
+
+            });
 
             return true;
         }
