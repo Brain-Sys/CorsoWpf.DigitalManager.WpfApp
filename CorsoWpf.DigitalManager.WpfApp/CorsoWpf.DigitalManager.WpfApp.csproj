@@ -82,6 +82,7 @@
       <DependentUpon>EditPerson.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\WeightToBrushConverter.cs" />
     <Compile Include="Dialogs\ConfirmWindow.xaml.cs">
       <DependentUpon>ConfirmWindow.xaml</DependentUpon>
     </Compile>

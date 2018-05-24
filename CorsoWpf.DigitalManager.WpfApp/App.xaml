@@ -6,6 +6,12 @@
              StartupUri="LoginWindow.xaml"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
+
+        <SolidColorBrush x:Key="WeightLOW">Green</SolidColorBrush>
+        <SolidColorBrush x:Key="WeightMEDIUM">Orange</SolidColorBrush>
+        <SolidColorBrush x:Key="WeightHIGH">Magenta</SolidColorBrush>
+        
         <cnv:BoolToVisibilityConverter x:Key="blnToVisCnv" />
+        <cnv:WeightToBrushConverter x:Key="weightBrushCnv" />
     </Application.Resources>
 </Application>

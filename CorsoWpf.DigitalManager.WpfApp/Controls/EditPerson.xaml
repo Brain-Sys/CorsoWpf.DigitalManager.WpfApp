@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:CorsoWpf.DigitalManager.WpfApp.Controls"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="400">
     <Border CornerRadius="8,24,8,24" BorderBrush="Red" BorderThickness="2"
-            Padding="8" Margin="4">
-        <Border.Style>
+            Padding="8" Margin="4"
+            Background="{Binding Status,Converter={StaticResource weightBrushCnv}}">
+        <!--<Border.Style>
             <Style TargetType="Border">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Status}" Value="LOW">
@@ -21,7 +22,7 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-        </Border.Style>
+        </Border.Style>-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -34,7 +35,24 @@
                 <!-- riga per la toolbar -->
             </Grid.RowDefinitions>
             <TextBlock Text="Nome" Grid.Row="0" />
-            <TextBox Text="{Binding FirstName}" Grid.Row="1" />
+            <TextBox Text="{Binding FirstName}" Grid.Row="1"
+                     Background="{Binding Status,Converter={StaticResource weightBrushCnv}}">
+                <!--<TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="LOW">
+                                <Setter Property="Background" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="MEDIUM">
+                                <Setter Property="Background" Value="DarkOrange" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="HIGH">
+                                <Setter Property="Background" Value="Violet" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>-->
+            </TextBox>
             <TextBlock Text="Cognome" Grid.Row="2" />
             <TextBox Text="{Binding LastName}" Grid.Row="3" />
             <TextBlock Text="Nazione" Grid.Row="4" />
@@ -52,7 +70,11 @@
                         <Setter Property="Margin" Value="1,0,1,8" />
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="S" />
+                <Button Content="S">
+                    <Button.ToolTip>
+                        <TextBlock Text="Salva la persona" Background="{Binding Status,Converter={StaticResource weightBrushCnv}}" FontSize="48" />
+                    </Button.ToolTip>
+                </Button>
                 <Button Content="D" />
                 <Button Content="E" Command="{Binding ExportCommand}" />
             </StackPanel>
