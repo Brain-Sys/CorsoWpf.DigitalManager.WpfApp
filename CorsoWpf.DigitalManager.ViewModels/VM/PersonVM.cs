@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -113,14 +114,23 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
 
             await Task.Run(async () =>
             {
+                SaveFileRequestMessage exportMsg = new SaveFileRequestMessage();
+                exportMsg.Title = "Scegli il file...";
+                exportMsg.SuggestedFileName = $"{this.InternalInstance.FirstName}_{this.InternalInstance.LastName}.txt";
+                Messenger.Default.Send(exportMsg);
 
-                int n = new Random((int)DateTime.Now.Ticks).Next(1, 10);
-                await Task.Delay(n * 1000);
+                if (exportMsg.Success)
+                {
+                    File.WriteAllText(exportMsg.Parameter.ToString(), "");
 
-                ShowMessage msg = new ShowMessage();
-                msg.Title = "Conferma";
-                msg.Message = "Esportazione completata!";
-                Messenger.Default.Send(msg);
+                    int n = new Random((int)DateTime.Now.Ticks).Next(1, 10);
+                    await Task.Delay(n * 1000);
+
+                    ShowMessage msg = new ShowMessage();
+                    msg.Title = "Conferma";
+                    msg.Message = "Esportazione completata!";
+                    Messenger.Default.Send(msg);
+                }
             });
 
             this.IsBusy = false;

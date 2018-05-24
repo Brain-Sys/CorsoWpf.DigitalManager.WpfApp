@@ -2,6 +2,7 @@
 using CorsoWpf.DigitalManager.ViewModels;
 using CorsoWpf.DigitalManager.WpfApp.Dialogs;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,10 +22,32 @@ namespace CorsoWpf.DigitalManager.WpfApp
     {
         public App()
         {
+            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             Debug.WriteLine("Thread UI : " + Thread.CurrentThread.ManagedThreadId);
             Messenger.Default.Register<OpenNewViewMessage>(this, openNewView);
             Messenger.Default.Register<ShowMessage>(this, showMessage);
             Messenger.Default.Register<QuestionMessage>(this, ask);
+            Messenger.Default.Register<SaveFileRequestMessage>(this, saveFile);
+        }
+
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show(e.Exception.ToString());
+            e.Handled = true;
+        }
+
+        private void saveFile(SaveFileRequestMessage obj)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Title = obj.Title;
+            dlg.FileName = obj.SuggestedFileName;
+            var result = dlg.ShowDialog().GetValueOrDefault();
+
+            if (result)
+            {
+                obj.Success = true;
+                obj.Parameter = dlg.FileName;
+            }
         }
 
         private void ask(QuestionMessage obj)
