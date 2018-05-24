@@ -29,9 +29,19 @@
                     <VirtualizingStackPanel />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
+            <!--<ListBox.ItemTemplate>
                 <DataTemplate>
                     <ctl:EditPerson />
+                </DataTemplate>
+            </ListBox.ItemTemplate>-->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBox Text="{Binding FirstName}" />
+                        <Button Content="Cancella" HorizontalAlignment="Right"
+                                Command="{Binding DeleteRowCommand,Source={StaticResource viewmodel}}"
+                                CommandParameter="{Binding}" />
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

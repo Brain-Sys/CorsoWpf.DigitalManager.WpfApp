@@ -67,14 +67,22 @@ namespace CorsoWpf.DigitalManager.ViewModels
         public RelayCommand DeleteCommand { get; set; }
         public RelayCommand SaveCommand { get; set; }
 
+        public RelayCommand<PersonVM> DeleteRowCommand { get; set; }
+
         public MainMenuViewModel()
         {
             this.DeleteCommand = new RelayCommand(DeleteCommandExecute, DeleteCommandCanExecute);
             this.SaveCommand = new RelayCommand(SaveCommandExecute, SaveCommandCanExecute);
             this.AddCommand = new RelayCommand(() => { this.Items.Insert(0, new PersonVM(new Person())); });
+            this.DeleteRowCommand = new RelayCommand<PersonVM>(DeleteRowCommandExecute);
 
             this.CurrentUser = "(guest)";
             Messenger.Default.Register<LoginSuccessfulMessage>(this, manageLogin);
+        }
+
+        private void DeleteRowCommandExecute(PersonVM parameter)
+        {
+            this.Items.Remove(parameter);
         }
 
         private bool DeleteCommandCanExecute()
@@ -127,7 +135,7 @@ namespace CorsoWpf.DigitalManager.ViewModels
 #endif
 
             List<Person> people = await repo.Load();
-            this.Items = new ObservableCollection<PersonVM>(people.Select(p => new PersonVM(p)).Take(1).ToList());
+            this.Items = new ObservableCollection<PersonVM>(people.Select(p => new PersonVM(p)).ToList());
             this.IsDownloading = false;
         }
 
