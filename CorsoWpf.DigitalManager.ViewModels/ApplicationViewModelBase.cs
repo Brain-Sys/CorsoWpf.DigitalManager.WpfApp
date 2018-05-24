@@ -13,6 +13,15 @@ namespace CorsoWpf.DigitalManager.ViewModels
             get { return isBusy; }
             set { isBusy = value;
                 base.RaisePropertyChanged();
+                base.RaisePropertyChanged(nameof(IsNotBusy));
+            }
+        }
+
+        public bool IsNotBusy
+        {
+            get
+            {
+                return !this.IsBusy;
             }
         }
 

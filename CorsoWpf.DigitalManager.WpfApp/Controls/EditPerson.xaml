@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CorsoWpf.DigitalManager.WpfApp.Controls"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="400">
     <Border CornerRadius="8,24,8,24" BorderBrush="Red" BorderThickness="2"
-            Padding="8" Margin="4"
+            Padding="8" Margin="4" IsEnabled="{Binding IsNotBusy}"
             Background="{Binding Status,Converter={StaticResource weightBrushCnv}}">
         <!--<Border.Style>
             <Style TargetType="Border">
