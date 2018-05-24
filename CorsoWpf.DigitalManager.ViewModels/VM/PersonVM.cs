@@ -87,6 +87,8 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
             }
         }
 
+        public RelayCommand SuCommand { get; set; }
+        public RelayCommand GiuCommand { get; set; }
         public RelayCommand ExportCommand { get; set; }
 
         /// <summary>
@@ -95,6 +97,8 @@ namespace CorsoWpf.DigitalManager.ViewModels.VM
         /// <param name="person"></param>
         public PersonVM(Person person)
         {
+            this.SuCommand = new RelayCommand(() => { this.Weight++; });
+            this.GiuCommand = new RelayCommand(() => { this.Weight--; });
             this.ExportCommand = new RelayCommand(ExportCommandExecute);
 
             this.InternalInstance = person;

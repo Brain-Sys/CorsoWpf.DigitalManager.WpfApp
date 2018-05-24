@@ -127,7 +127,7 @@ namespace CorsoWpf.DigitalManager.ViewModels
 #endif
 
             List<Person> people = await repo.Load();
-            this.Items = new ObservableCollection<PersonVM>(people.Select(p => new PersonVM(p)).ToList());
+            this.Items = new ObservableCollection<PersonVM>(people.Select(p => new PersonVM(p)).Take(1).ToList());
             this.IsDownloading = false;
         }
 

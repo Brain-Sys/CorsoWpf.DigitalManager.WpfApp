@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hlp="clr-namespace:CorsoWpf.DigitalManager.WpfApp.Helpers"
              xmlns:local="clr-namespace:CorsoWpf.DigitalManager.WpfApp.Controls"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="400">
     <Border CornerRadius="8,24,8,24" BorderBrush="Red" BorderThickness="2"
@@ -57,7 +58,20 @@
             <TextBox Text="{Binding LastName}" Grid.Row="3" />
             <TextBlock Text="Nazione" Grid.Row="4" />
             <!--<ComboBox Grid.Row="5" HorizontalAlignment="Left" />-->
-            <Slider Grid.Row="5" Minimum="0" Maximum="100" Value="{Binding Weight}" />
+            <!--<Slider Grid.Row="5" Minimum="0" Maximum="100" Value="{Binding Weight}" />-->
+            <StackPanel Grid.Row="5">
+                <!--
+                Utilizzato Attached Behavior per collegare il mouse wheel
+                verso un command(s) del viewmodel
+                
+                L'attached behavior trasforma un evento del code behind
+                in una proprietà dello XAML per permettere l'utilizzo di Binding
+                -->
+                <TextBox IsReadOnly="True" Text="{Binding Weight}"
+                     hlp:Wheel.UpCommand="{Binding SuCommand}"
+                     hlp:Wheel.DownCommand="{Binding GiuCommand}"/>
+                <Slider Minimum="0" Maximum="200" Value="{Binding Weight}" />
+            </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="6">
                 <StackPanel.Resources>
@@ -75,7 +89,7 @@
                         <TextBlock Text="Salva la persona" Background="{Binding Status,Converter={StaticResource weightBrushCnv}}" FontSize="48" />
                     </Button.ToolTip>
                 </Button>
-                <Button Content="D" />
+                <Button Content="D" hlp:Wheel.UpCommand="{Binding ExportCommand}" />
                 <Button Content="E" Command="{Binding ExportCommand}" />
             </StackPanel>
 
