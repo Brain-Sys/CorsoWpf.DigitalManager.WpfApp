@@ -19,6 +19,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        
+
         <ListBox ItemsSource="{Binding Items}"
                  HorizontalContentAlignment="Stretch"
                  SelectedItem="{Binding SelectedPerson}">
